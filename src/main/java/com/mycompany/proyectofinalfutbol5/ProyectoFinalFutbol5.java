@@ -68,7 +68,7 @@ public class ProyectoFinalFutbol5 {
 //;(
 // si leen esto es por que sirve 
 //ostras
-
+// creo que ya estamos todos conectados 
 
 
 
