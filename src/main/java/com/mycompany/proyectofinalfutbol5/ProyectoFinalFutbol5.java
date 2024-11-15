@@ -67,13 +67,6 @@ public class ProyectoFinalFutbol5 {
 }
 
 
-// jalkfslkdafhlskdgfsd
-//fghdfghdfghdfgdf
-//dfgdfgfdg
-//dghfg
-//fghfghfg
-///fghfgh
-//fghfghfg
-// 
+
 
 
