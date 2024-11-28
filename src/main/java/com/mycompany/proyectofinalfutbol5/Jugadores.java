@@ -6,8 +6,8 @@ public class Jugadores {
 
     private int ID; //0
     private String nombre; //null
-    private Posicion posicion; //null
-    private Equipos equipo; //null
+    private Posicion posicion; 
+    private Equipos equipo; 
     private Estado estado;
     private int golesAnotados;
     private boolean activo; //false

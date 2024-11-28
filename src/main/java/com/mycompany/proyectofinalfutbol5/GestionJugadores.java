@@ -65,7 +65,7 @@ public class GestionJugadores {
                         + " NOMBRE: " + jugador.getNombre()
                         + " POSICION: " + jugador.getPosicion()
                         + " ESTADDO: " + jugador.getEstado()
-                        + " EQUIPO: ";
+                        + " EQUIPO: " + jugador.getEquipo();
                 if (jugador.getEquipo() == null) {
                     listaJugadores += "Libre";
                 } else {
@@ -78,12 +78,13 @@ public class GestionJugadores {
     }
 
     private static void agregarJugador() {
-        String nombreJugador = JOptionPane.showInputDialog("Ingrese el nombre del jugador: ");
+        String nombre = JOptionPane.showInputDialog("Ingrese el nombre del jugador: ");
+        int ID = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del jugador:"));
         Posicion posicion = seleccionPosicion();
         Estado estado = seleccionEstado();
         Equipos equipo = seleccionEquipo();
 
-        Jugadores jugador = new Jugadores(idJugadorNuevo, nombreJugador, posicion, equipo, estado, 0);
+        Jugadores jugador = new Jugadores(ID, nombre, posicion, equipo, estado, 0);
         jugadores[cantidadJugadores] = jugador;
         cantidadJugadores++;
         idJugadorNuevo++;
