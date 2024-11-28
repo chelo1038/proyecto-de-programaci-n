@@ -82,98 +82,93 @@ public class GestionJugadores {
         Posicion posicion = seleccionPosicion();
         Estado estado = seleccionEstado();
         Equipos equipo = seleccionEquipo();
-        
-         Jugadores jugador  = new Jugadores(idJugadorNuevo, nombreJugador, posicion, equipo, estado, 0);
-         jugadores [cantidadJugadores] = jugador;
-         cantidadJugadores++;
-         idJugadorNuevo++;
 
-      JOptionPane.showMessageDialog (null,
-                    "Jugador agregado con exito: "
-                    +" \n ID: " + jugador.getID()
-                    +" \n NOMBRE: " + jugador.getNombre()
-                    +" \n POSICION: " + jugador.getPosicion()
-                    +" \n EQUIPO: " + jugador.getEquipo()
-                    +" \n ESTADDO: " + jugador.getEstado());
+        Jugadores jugador = new Jugadores(idJugadorNuevo, nombreJugador, posicion, equipo, estado, 0);
+        jugadores[cantidadJugadores] = jugador;
+        cantidadJugadores++;
+        idJugadorNuevo++;
+
+        JOptionPane.showMessageDialog(null,
+                "Jugador agregado con exito: "
+                + " \n ID: " + jugador.getID()
+                + " \n NOMBRE: " + jugador.getNombre()
+                + " \n POSICION: " + jugador.getPosicion()
+                + " \n EQUIPO: " + jugador.getEquipo()
+                + " \n ESTADDO: " + jugador.getEstado());
     }
-           
- 
 
-       private static void editarJugador(){
-            if (cantidadJugadores == 0) {
+    private static void editarJugador() {
+        if (cantidadJugadores == 0) {
             JOptionPane.showMessageDialog(null, "No hay jugadores para editar");
             return;
-    }
-            int idJugador = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del nuevo jugador: "));
-            boolean jugadorEncontrado = false;
-           
-            for (int i = 0; i < cantidadJugadores; i++){
-                if(jugadores[i].getID() == idJugador){
-                    jugadorEncontrado = true;
-                    
-                    String nuevoNombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre del nuevo jugador");
-                    jugadores[i].setNombre(nuevoNombre);
+        }
+        int idJugador = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del nuevo jugador: "));
+        boolean jugadorEncontrado = false;
 
-                    Posicion nuevaPosicion = seleccionPosicion();
-                    jugadores[i].setPosicion(nuevaPosicion);
-                    
-                    Estado nuevoEstado = seleccionEstado();
-                    jugadores[i].setEstado(nuevoEstado);
-                    
-                    Equipos nuevoEquipo = seleccionEquipo();
-                    jugadores[i].setEquipo(nuevoEquipo);
-                    
-                    
-                       JOptionPane.showMessageDialog(null, "Jugador editado con exito:"
-                         +"\nID: " + jugadores[i].getID()
-                         +"\n NOMBRE: " + jugadores[i].getNombre()
-                         +"\n POSICION: " + jugadores[i].getPosicion()
-                         +"\n EQUIPO: " + jugadores[i].getEquipo()
-                         +"\n ESTADDO: " + jugadores[i].getEstado());
-                       return;
-                    }
-            }
-            if(!jugadorEncontrado){
-            JOptionPane.showMessageDialog(null,"Jugador no encontrado");
-            }
-       }
-               
+        for (int i = 0; i < cantidadJugadores; i++) {
+            if (jugadores[i].getID() == idJugador) {
+                jugadorEncontrado = true;
 
-         private static void eliminarJugador(){
-            if (cantidadJugadores == 0) {
-             JOptionPane.showMessageDialog(null, "No hay jugadores para eliminar");
-              return;
+                String nuevoNombre = JOptionPane.showInputDialog("Ingrese el nuevo nombre del nuevo jugador");
+                jugadores[i].setNombre(nuevoNombre);
+
+                Posicion nuevaPosicion = seleccionPosicion();
+                jugadores[i].setPosicion(nuevaPosicion);
+
+                Estado nuevoEstado = seleccionEstado();
+                jugadores[i].setEstado(nuevoEstado);
+
+                Equipos nuevoEquipo = seleccionEquipo();
+                jugadores[i].setEquipo(nuevoEquipo);
+
+                JOptionPane.showMessageDialog(null, "Jugador editado con exito:"
+                        + "\nID: " + jugadores[i].getID()
+                        + "\n NOMBRE: " + jugadores[i].getNombre()
+                        + "\n POSICION: " + jugadores[i].getPosicion()
+                        + "\n EQUIPO: " + jugadores[i].getEquipo()
+                        + "\n ESTADDO: " + jugadores[i].getEstado());
+                return;
+            }
+        }
+        if (!jugadorEncontrado) {
+            JOptionPane.showMessageDialog(null, "Jugador no encontrado");
+        }
     }
-             int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del jugador: "));
-             for (int i = 0; i < cantidadJugadores; i++){
-                if(jugadores[i].getID() == id){
-                   if(jugadores[i].getEquipo() != null) {
-                       JOptionPane.showMessageDialog(null, "No se puede eliminar un jugador asignado a un equipo.");
-                       return;
-                   }
-                    jugadores[i] = jugadores[--cantidadJugadores];
-                    jugadores[cantidadJugadores] = null;
-                    JOptionPane.showMessageDialog(null,"Jugador eliminado con exito.");
+
+    private static void eliminarJugador() {
+        if (cantidadJugadores == 0) {
+            JOptionPane.showMessageDialog(null, "No hay jugadores para eliminar");
+            return;
+        }
+        int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del jugador: "));
+        for (int i = 0; i < cantidadJugadores; i++) {
+            if (jugadores[i].getID() == id) {
+                if (jugadores[i].getEquipo() != null) {
+                    JOptionPane.showMessageDialog(null, "No se puede eliminar un jugador asignado a un equipo.");
                     return;
-                    }
-      
-                   }
-            JOptionPane.showMessageDialog(null,"Jugador no encontrado");   
-}
+                }
+                jugadores[i] = jugadores[--cantidadJugadores];
+                jugadores[cantidadJugadores] = null;
+                JOptionPane.showMessageDialog(null, "Jugador eliminado con exito.");
+                return;
+            }
 
-         private static Posicion seleccionPosicion(){
-          String[] opciones = { "Portero", "Defensa", "Mediocampista", "Delantero"
-    };
-           int seleccion = JOptionPane.showOptionDialog(null,
+        }
+        JOptionPane.showMessageDialog(null, "Jugador no encontrado");
+    }
+
+    private static Posicion seleccionPosicion() {
+        String[] opciones = {"Portero", "Defensa", "Mediocampista", "Delantero"
+        };
+        int seleccion = JOptionPane.showOptionDialog(null,
                 "Selecione la posicion del juagdor",
-                "Posicion", 
-                JOptionPane.DEFAULT_OPTION, 
-                JOptionPane.QUESTION_MESSAGE, 
-                null, 
-                opciones, 
+                "Posicion",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opciones,
                 opciones[0]);
-     
-        
+
         Posicion posicion = null;
         switch (seleccion) {
             case 0:
@@ -188,70 +183,66 @@ public class GestionJugadores {
             case 3:
                 posicion = Posicion.Delantero;
                 break;
-            
-    }     
-        return posicion;    
-    }
-            
-        private static Estado seleccionEstado(){
-            String[] opcionesEstado = {"Titular", "Suplente", "Libre"};
-            int seleccionEstado = JOptionPane.showOptionDialog(
-                    null, 
-                    "Seleccione el estado del jugador",
-                    "Estado", 
-                    JOptionPane.DEFAULT_OPTION, 
-                    JOptionPane.QUESTION_MESSAGE, 
-                    null, 
-                    opcionesEstado, 
-                    opcionesEstado[0]);
-            
-            Estado estado = null;
-            switch (seleccionEstado) {
-               case 0:
-                  estado = Estado.Titular;
-                break;
-                case 1:
-                  estado = Estado.Suplente ;
-                break;
-                case 2:
-                  estado = Estado.Libre;
-                break;
-               
+
         }
-            return estado;
+        return posicion;
     }
-        
-        
-        private static Equipos seleccionEquipo(){
-            String[] opciones = {"Libre", "LigaDeprtiva","Saprissa", "Heredia"};
-            int seleccion = JOptionPane.showOptionDialog(
-                    null, 
-                    "Seleccione el equipo del jugador",
-                    "Eqquipo", 
-                    JOptionPane.DEFAULT_OPTION, 
-                    JOptionPane.QUESTION_MESSAGE, 
-                    null, 
-                    opciones, 
-                    opciones[0]);
-            
-            Equipos equipo = null;
-            switch (seleccion) {
-               case 0:
-                  equipo = null;
+
+    private static Estado seleccionEstado() {
+        String[] opcionesEstado = {"Titular", "Suplente", "Libre"};
+        int seleccionEstado = JOptionPane.showOptionDialog(
+                null,
+                "Seleccione el estado del jugador",
+                "Estado",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opcionesEstado,
+                opcionesEstado[0]);
+
+        Estado estado = null;
+        switch (seleccionEstado) {
+            case 0:
+                estado = Estado.Titular;
                 break;
-                case 1:
-                  equipo = new Equipos(1, "LigaDeportiva") ;
+            case 1:
+                estado = Estado.Suplente;
                 break;
-                case 2:
-                  equipo = new Equipos(2, "Saprissa");
+            case 2:
+                estado = Estado.Libre;
                 break;
-                case 3:
-                  equipo = new Equipos(3, "Heredia");
+
+        }
+        return estado;
+    }
+
+    private static Equipos seleccionEquipo() {
+        String[] opciones = {"Libre", "LigaDeprtiva", "Saprissa", "Heredia"};
+        int seleccion = JOptionPane.showOptionDialog(
+                null,
+                "Seleccione el equipo del jugador",
+                "Eqquipo",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                opciones,
+                opciones[0]);
+
+        Equipos equipo = null;
+        switch (seleccion) {
+            case 0:
+                equipo = null;
+                break;
+            case 1:
+                equipo = new Equipos(1, "LigaDeportiva");
+                break;
+            case 2:
+                equipo = new Equipos(2, "Saprissa");
+                break;
+            case 3:
+                equipo = new Equipos(3, "Heredia");
                 break;
         }
-            return equipo;
-} 
+        return equipo;
+    }
 }
-    
-
-
