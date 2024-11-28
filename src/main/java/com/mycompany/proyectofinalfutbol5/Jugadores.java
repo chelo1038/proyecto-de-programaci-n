@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public class Jugadores {
 
-   private int ID; //0
+    private int ID; //0
     private String nombre; //null
     private Posicion posicion; //null
     private Equipos equipo; //null
@@ -85,10 +85,9 @@ public class Jugadores {
         } else {
             actividad = "Inactivo";
         }
-        
-        
+
         String equipoNombre = "Libre";
-        if (equipo != null){
+        if (equipo != null) {
             equipoNombre = equipo.getNombreEquipo();
         }
 
@@ -102,11 +101,4 @@ public class Jugadores {
                 + "\nESTADO DEL JUGADOR: " + actividad);
     }
 
- 
-    }
- 
-    
-    
-    
-    
-
+}
