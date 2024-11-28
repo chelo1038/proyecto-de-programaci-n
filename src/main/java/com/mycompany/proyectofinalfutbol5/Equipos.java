@@ -16,9 +16,9 @@ public class Equipos {
     private int golesEnContra;
     private int posesionBalon;
 
-    public Equipos(int idEquipo, String nombreEquipo, int partidosJugados, int partidosGanados, 
-    int partidosEmpatados, int partidosPerdidos, int golesFavor, int golesEnContra, int posesionBalon) {
-        
+    public Equipos(int idEquipo, String nombreEquipo, int partidosJugados, int partidosGanados,
+            int partidosEmpatados, int partidosPerdidos, int golesFavor, int golesEnContra, int posesionBalon) {
+
         this.idEquipo = idEquipo;
         this.nombreEquipo = nombreEquipo;
         this.partidosJugados = 0;
@@ -29,11 +29,9 @@ public class Equipos {
         this.golesEnContra = 0;
         this.posesionBalon = 0;
     }
-    
-    
 
     Equipos(int idEquipo, String nombreEquipo) {
-       
+
     }
 
     public int getIdEquipo() {
@@ -123,24 +121,24 @@ public class Equipos {
     public void setPosesionBalon(int posesionBalon) {
         this.posesionBalon = posesionBalon;
     }
-    
+
     public void mostrarDetalles() {
-      JOptionPane.showMessageDialog(null,"""
+        JOptionPane.showMessageDialog(null, """
       DATOS DEL EQUIPO:
       ID: """ + idEquipo
-      + "\nNombre: " + nombreEquipo
-      + "\nJugadores: " + jugadores.length 
-      + "\nPartidos Jugados: " + partidosJugados 
-      + "\nPartidos Ganados: " + partidosGanados
-      + "\nPartidos Empatados: " + partidosEmpatados
-      + "\nPartidos Perdidos: " + partidosPerdidos 
-      + "\nGoles a Favor: " + golesFavor
-      + "\nGoles en Contra: " + golesEnContra
-      + "\nPosesion del balon: " + posesionBalon );
+                + "\nNombre: " + nombreEquipo
+                + "\nJugadores: " + jugadores.length
+                + "\nPartidos Jugados: " + partidosJugados
+                + "\nPartidos Ganados: " + partidosGanados
+                + "\nPartidos Empatados: " + partidosEmpatados
+                + "\nPartidos Perdidos: " + partidosPerdidos
+                + "\nGoles a Favor: " + golesFavor
+                + "\nGoles en Contra: " + golesEnContra
+                + "\nPosesion del balon: " + posesionBalon);
     }
-    
-    public boolean agregarJugador(Jugadores jugador){
-        if(cantidadJugadores < 7){
+
+    public boolean agregarJugador(Jugadores jugador) {
+        if (cantidadJugadores < 7) {
             jugadores[cantidadJugadores] = jugador;
             cantidadJugadores++;
             return true;
@@ -148,34 +146,26 @@ public class Equipos {
         return false;
     }
 
-    
-    
-    public boolean eliminarJugador(int idJugador){
+    public boolean eliminarJugador(int idJugador) {
         for (int i = 0; i < cantidadJugadores; i++) {
-            if(jugadores[i].getID() == idJugador) {
+            if (jugadores[i].getID() == idJugador) {
                 jugadores[i] = jugadores[--cantidadJugadores];
                 jugadores[cantidadJugadores] = null;
                 return true;
             }
-            
+
         }
         return false;
     }
-    
-    public static Equipos[] EquiposPredeterminados(){
+
+    public static Equipos[] EquiposPredeterminados() {
         Equipos libre = new Equipos(0, "Libre");
         Equipos ligaDeportiva = new Equipos(1, "LigaDeportiva");
         Equipos saprissa = new Equipos(2, "Saprissa");
         Equipos heredia = new Equipos(3, "Heredia");
-        
-        
+
         return new Equipos[]{libre, ligaDeportiva, saprissa, heredia};
-        
+
     }
-    
-} 
 
-
-
-
-    
+}
