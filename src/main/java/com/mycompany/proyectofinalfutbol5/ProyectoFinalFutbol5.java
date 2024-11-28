@@ -28,7 +28,7 @@ public class ProyectoFinalFutbol5 {
                     JOptionPane.INFORMATION_MESSAGE,
                     null,
                     opciones,
-                    opciones[3]);
+                    opciones[0]);
 
             switch (codigo) {
                 case 0:
@@ -68,8 +68,19 @@ public class ProyectoFinalFutbol5 {
 
 
 
+//Para este segundo avance (5% del total del proyecto), se solicita presentar: 
+// Haber implementado los constructores y el encapsulamiento en las clases del proyecto.
 
+// El sistema debería contener arreglos de objetos para manipular los objetos dentro del sistema.
 
+// Implementación de la relación entre las clases, donde los jugadores se asocian a un equipo y 
+//viceversa. 
+
+// La gestión completa de jugadores y equipos en el sistema, con la funcionalidad de agregar, editar y 
+//eliminar. 
+
+// Una simulación básica de partidos, aunque no sea completa, que muestre el uso de los jugadores y 
+//equipos en el sistema. 
 
 
 
