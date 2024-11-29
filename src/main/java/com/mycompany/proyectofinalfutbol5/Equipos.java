@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public class Equipos {
 
-    private int idEquipo;
+    private int idEquipo = 100;
     private String nombreEquipo; //null
     private Jugadores[] jugadores = new Jugadores[7];
     private int cantidadJugadores = 0;
@@ -16,8 +16,7 @@ public class Equipos {
     private int golesEnContra;
     private int posesionBalon;
 
-    public Equipos(int idEquipo, String nombreEquipo, int partidosJugados, int partidosGanados,
-            int partidosEmpatados, int partidosPerdidos, int golesFavor, int golesEnContra, int posesionBalon) {
+    public Equipos(String nombreEquipo) {
 
         this.idEquipo = idEquipo;
         this.nombreEquipo = nombreEquipo;
@@ -159,12 +158,11 @@ public class Equipos {
     }
 
     public static Equipos[] EquiposPredeterminados() {
-        Equipos libre = new Equipos(0, "Libre");
         Equipos ligaDeportiva = new Equipos(1, "LigaDeportiva");
         Equipos saprissa = new Equipos(2, "Saprissa");
         Equipos heredia = new Equipos(3, "Heredia");
 
-        return new Equipos[]{libre, ligaDeportiva, saprissa, heredia};
+        return new Equipos[]{ ligaDeportiva, saprissa, heredia};
 
     }
 
