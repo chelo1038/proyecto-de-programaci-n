@@ -64,20 +64,24 @@ public class GestionEquipo {
 
     }
 
-    public static void agregarEquipo() {
-
-        if (cantidadEquipos < equipos.length) {
-            String nombreEquipo = JOptionPane.showInputDialog("Ingrese el nombre del equipo: ");
-            int idEquipo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del equipo: "));
-
-            equipos[cantidadEquipos] = new Equipos(idEquipo, nombreEquipo);
+ public static void agregarEquipo() {
+    if (cantidadEquipos < equipos.length) {
+        String nombreEquipo = JOptionPane.showInputDialog("Ingrese el nombre del equipo: ");
+        if (nombreEquipo != null) {
+            Equipos nuevoEquipo = new Equipos(nombreEquipo);
+            equipos[cantidadEquipos] = nuevoEquipo;
             cantidadEquipos++;
-            JOptionPane.showMessageDialog(null, "El equipo se agrego correctamente.");
+            JOptionPane.showMessageDialog(null, "El equipo se agregó correctamente.");
         } else {
-            JOptionPane.showMessageDialog(null, "No se pueden agregar mas de 3 equipos.");
-
+            JOptionPane.showMessageDialog(null, "El nombre del equipo no puede estar vacío.");
         }
+    } else {
+        JOptionPane.showMessageDialog(null, "No se pueden agregar más de " + equipos.length + " equipos.");
     }
+}
+
+
+       
 
     public static void agregarJugadorEquipo() {
         int idEquipo = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del equipo al que se va agregar el jugador: "));
@@ -138,7 +142,7 @@ public class GestionEquipo {
 
         for (int i = 0; i < cantidadEquipos; i++) {
             if (equipos[i].getIdEquipo() == idEquipo) {
-                Jugadores jugador = new Jugadores(idJugador, nombreJugador, posicion, equipos[i], estado, 0);
+                Jugadores jugador = new Jugadores(nombreJugador, posicion, equipos[i], estado, 0);
                 if (equipos[i].getCantidadJugadores() < 7) {
                     equipos[i].agregarJugador(jugador);
                     JOptionPane.showMessageDialog(null, "Jugador agregado con exito al equipo."
