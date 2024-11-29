@@ -4,7 +4,7 @@ import javax.swing.JOptionPane;
 
 public class Jugadores {
 
-    private int ID; //0
+    private int ID = 10; //0
     private String nombre; //null
     private Posicion posicion; 
     private Equipos equipo; 
@@ -12,8 +12,8 @@ public class Jugadores {
     private int golesAnotados;
     private boolean activo; //false
 
-    public Jugadores(int ID, String nombre, Posicion posicion, Equipos equipo, Estado estado, int golesAnotados) {
-        this.ID = ID;
+    public Jugadores(String nombre, Posicion posicion, Equipos equipo, Estado estado, int golesAnotados) {
+        this.ID = ID++;
         this.nombre = nombre;
         this.posicion = posicion;
         this.equipo = equipo;
@@ -23,10 +23,7 @@ public class Jugadores {
 
     public int getID() {
         return ID;
-    }
 
-    public void setID(int ID) {
-        this.ID = ID;
     }
 
     public String getNombre() {
@@ -78,18 +75,18 @@ public class Jugadores {
     }
 
     public void mostrarDetalles() {
-        String actividad;
+//        String actividad;
 
-        if (activo == true) {
-            actividad = "activo";
-        } else {
-            actividad = "Inactivo";
-        }
-
-        String equipoNombre = "Libre";
-        if (equipo != null) {
-            equipoNombre = equipo.getNombreEquipo();
-        }
+//        if (activo == true) {
+//            actividad = "activo";
+//        } else {
+//            actividad = "Inactivo";
+//        }
+//
+//        String equipoNombre = "Libre";
+//        if (equipo != null) {
+//            equipoNombre = equipo.getNombreEquipo();
+//        }
 
         JOptionPane.showMessageDialog(null, "DATOS DEL JUGADOR: " + nombre
                 + "\nID: " + ID
@@ -97,8 +94,8 @@ public class Jugadores {
                 + "\nPOSICION: " + posicion
                 + "\nEQUIPO: " + equipo
                 + "\nESTADO: " + estado
-                + "\nGOLES: " + golesAnotados
-                + "\nESTADO DEL JUGADOR: " + actividad);
+                + "\nGOLES: " + golesAnotados);
+//                + "\nESTADO DEL JUGADOR: " + actividad);
     }
 
 }
