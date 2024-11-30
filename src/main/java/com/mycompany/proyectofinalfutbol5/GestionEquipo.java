@@ -51,16 +51,21 @@ public class GestionEquipo {
     }
 
     public static void mostrarEquipos() {
-        if (cantidadEquipos == 0) {
-            System.out.println("No hay equipos registrados.");
-        } else {
-            String listaEquipos = "Equipos registrados";
-            for (int i = 0; i < cantidadEquipos; i++) {
-                listaEquipos += equipos[i].getIdEquipo() + " - " + equipos[i].getNombreEquipo()
-                        + "\n";
+        String listaEquipos = "Equipos registrados";
+        for (int i = 0; i < cantidadEquipos; i++) {
+            Equipos equipo = equipos[i];
+            listaEquipos += "ID Equipo: " + equipo.getIdEquipo() + "Nombre: " + equipo.getNombreEquipo();
+            listaEquipos += "Jugadores:";
+                    
+             for (int j = 0; j < equipo.getCantidadJugadores(); j++) {
+                 Jugadores jugador = equipo.getJugadores()[j];
+                 listaEquipos += "ID: " + jugador.getID() + "Nombre: " + jugador.getNombre() +
+                         "Posicion: " + jugador.getPosicion() + "Estado: " + jugador.getEstado();
             }
-            JOptionPane.showMessageDialog(null, listaEquipos);
+             listaEquipos += "\n";
+            
         }
+        JOptionPane.showMessageDialog(null, listaEquipos);
 
     }
 
@@ -142,7 +147,7 @@ public class GestionEquipo {
 
         for (int i = 0; i < cantidadEquipos; i++) {
             if (equipos[i].getIdEquipo() == idEquipo) {
-                Jugadores jugador = new Jugadores(nombreJugador, posicion, equipos[i], estado, 0);
+                Jugadores jugador = new Jugadores(nombreJugador, posicion, equipos[i], estado);
                 if (equipos[i].getCantidadJugadores() < 7) {
                     equipos[i].agregarJugador(jugador);
                     JOptionPane.showMessageDialog(null, "Jugador agregado con exito al equipo."
