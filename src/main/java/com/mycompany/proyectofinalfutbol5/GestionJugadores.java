@@ -6,7 +6,8 @@ public class GestionJugadores {
 
     private static Jugadores[] jugadores = new Jugadores[70];
     private static int cantidadJugadores = 0;
-    private static int idJugadorNuevo = 10;
+    private static Equipos[] equipos = new Equipos[10];
+    private static int cantidadEquipos = 0;
 
     public static void gestionJugadores() {
         //String jugador= JOptionPane.showInputDialog("ingrese el nombre del jugador  ");
@@ -54,27 +55,19 @@ public class GestionJugadores {
     }
 
     private static void mostrarJugadores() {
-        if (cantidadJugadores == 0) {
-            System.out.println("No hay jugadores en el equipo: ");
-        } else {
-
-            String listaJugadores = "Lista de jugadores:";
-            for (int i = 0; i < cantidadJugadores; i++) {
-                Jugadores jugador = jugadores[i];
-                listaJugadores += "ID: " + jugador.getID()
-                        + " NOMBRE: " + jugador.getNombre()
-                        + " POSICION: " + jugador.getPosicion()
-                        + " ESTADDO: " + jugador.getEstado()
-                        + " EQUIPO: " + jugador.getEquipo();
-                if (jugador.getEquipo() == null) {
-                    listaJugadores += "Libre";
-                } else {
-                    listaJugadores += jugador.getEquipo().getNombreEquipo();
-                }
-
-            }
-            JOptionPane.showMessageDialog(null, listaJugadores);
+         String listaJugadores = "Lista de jugadores:\n";
+    for (int i = 0; i < 30; i++) {  // Suponiendo que has inicializado 30 jugadores
+        Jugadores jugador = Jugadores.getJugadorPorID(i); // Usando getJugadorPorID para obtener el jugador
+        if (jugador != null) {
+            String equipoNombre = (jugador.getEquipo() == null) ? "Libre" : jugador.getEquipo().getNombreEquipo();
+            System.out.println( "ID: " + jugador.getID() +
+"                              \" | Nombre: \" + jugador.getNombre() +\n" +
+"                              \" | Posición: \" + jugador.getPosicion() +\n" +
+"                              \" | Estado: \" + jugador.getEstado() +\n" +
+"                              \" | Equipo: \" + equipoNombre + \"\\n\";"); 
         }
+    }
+    JOptionPane.showMessageDialog(null, listaJugadores); 
     }
 
     private static void agregarJugador() {
@@ -83,10 +76,10 @@ public class GestionJugadores {
         Equipos equipos = seleccionEquipo();
         Estado estado = seleccionEstado();
 
-        Jugadores jugador = new Jugadores(nombre, posicion, equipos, estado, 0);
+        Jugadores jugador = new Jugadores(nombre, posicion, equipos, estado);
         jugadores[cantidadJugadores] = jugador;
         cantidadJugadores++;
-        idJugadorNuevo++;
+       
 
         JOptionPane.showMessageDialog(null,
                 "Jugador agregado con exito: "
@@ -231,13 +224,13 @@ public class GestionJugadores {
         Equipos equipo = null;
         switch (seleccion) {
             case 1:
-                equipo = new Equipos(1, "LigaDeportiva");
+                equipo = new Equipos("LigaDeportiva");
                 break;
             case 2:
-                equipo = new Equipos(2, "Saprissa");
+                equipo = new Equipos("Saprissa");
                 break;
             case 3:
-                equipo = new Equipos(3, "Heredia");
+                equipo = new Equipos("Heredia");
                 break;
         }
         return equipo;
