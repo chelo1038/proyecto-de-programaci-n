@@ -3,8 +3,11 @@ package com.mycompany.proyectofinalfutbol5;
 import javax.swing.JOptionPane;
 
 public class Equipos {
+    
+    private static Equipos[] equipos = new Equipos[10];
+    private static int contadorEquipos = 100;
 
-    private int idEquipo = 100;
+    private int idEquipo;
     private String nombreEquipo; //null
     private Jugadores[] jugadores = new Jugadores[7];
     private int cantidadJugadores = 0;
@@ -16,9 +19,10 @@ public class Equipos {
     private int golesEnContra;
     private int posesionBalon;
 
+
     public Equipos(String nombreEquipo) {
 
-        this.idEquipo = idEquipo;
+        this.idEquipo = contadorEquipos++;
         this.nombreEquipo = nombreEquipo;
         this.partidosJugados = 0;
         this.partidosGanados = 0;
@@ -27,10 +31,6 @@ public class Equipos {
         this.golesFavor = 0;
         this.golesEnContra = 0;
         this.posesionBalon = 0;
-    }
-
-    Equipos(int idEquipo, String nombreEquipo) {
-
     }
 
     public int getIdEquipo() {
@@ -136,20 +136,19 @@ public class Equipos {
                 + "\nPosesion del balon: " + posesionBalon);
     }
 
-    public boolean agregarJugador(Jugadores jugador) {
-        if (cantidadJugadores < 7) {
-            jugadores[cantidadJugadores] = jugador;
-            cantidadJugadores++;
-            return true;
+    public void agregarJugador(Jugadores jugador) {
+        if (cantidadJugadores < jugadores.length) {
+            jugadores[cantidadJugadores++] = jugador;
         }
-        return false;
     }
 
     public boolean eliminarJugador(int idJugador) {
         for (int i = 0; i < cantidadJugadores; i++) {
             if (jugadores[i].getID() == idJugador) {
-                jugadores[i] = jugadores[--cantidadJugadores];
-                jugadores[cantidadJugadores] = null;
+                for (int j = i; j < cantidadJugadores - 1; j++) {
+                    jugadores[j] = jugadores[j + 1];
+                }
+                jugadores[--cantidadJugadores] =  null;
                 return true;
             }
 
@@ -157,13 +156,35 @@ public class Equipos {
         return false;
     }
 
-    public static Equipos[] EquiposPredeterminados() {
-        Equipos ligaDeportiva = new Equipos(1, "LigaDeportiva");
-        Equipos saprissa = new Equipos(2, "Saprissa");
-        Equipos heredia = new Equipos(3, "Heredia");
+    public static void inicializarJugadoresYAsignarEquipos() {
+        Jugadores.inicializarJugadores();  
 
-        return new Equipos[]{ ligaDeportiva, saprissa, heredia};
+        Equipos equipo1 = new Equipos("Liga Deportiva");
+        Equipos equipo2 = new Equipos("Saprissa");
+        Equipos equipo3 = new Equipos("Heredia");
 
+       
+        equipo1.agregarJugador(Jugadores.getJugadorPorID(0));
+        equipo1.agregarJugador(Jugadores.getJugadorPorID(1));
+        equipo1.agregarJugador(Jugadores.getJugadorPorID(2));
+        equipo1.agregarJugador(Jugadores.getJugadorPorID(3));
+        equipo1.agregarJugador(Jugadores.getJugadorPorID(4));
+
+        equipo2.agregarJugador(Jugadores.getJugadorPorID(5));
+        equipo2.agregarJugador(Jugadores.getJugadorPorID(6));
+        equipo2.agregarJugador(Jugadores.getJugadorPorID(7));
+        equipo2.agregarJugador(Jugadores.getJugadorPorID(8));
+        equipo2.agregarJugador(Jugadores.getJugadorPorID(9));
+
+        equipo3.agregarJugador(Jugadores.getJugadorPorID(10));
+        equipo3.agregarJugador(Jugadores.getJugadorPorID(11));
+        equipo3.agregarJugador(Jugadores.getJugadorPorID(12));
+        equipo3.agregarJugador(Jugadores.getJugadorPorID(13));
+        equipo3.agregarJugador(Jugadores.getJugadorPorID(14));
+
+       
+        Jugadores.mostrarJugadores();
     }
 
 }
+
