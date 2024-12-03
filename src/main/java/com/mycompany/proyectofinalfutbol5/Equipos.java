@@ -1,18 +1,18 @@
 package com.mycompany.proyectofinalfutbol5;
 
-import javax.swing.JOptionPane;
-
 public class Equipos {
+
     private static Equipos[] equipos = new Equipos[10]; // Arreglo de 10 equipos
-    private static int contadorEquipos = 100;
+    private static int contadorEquipos = 100; // El ID de los equipos comienza en 100
 
     private int idEquipo;
     private String nombreEquipo;
     private Jugadores[] jugadores = new Jugadores[7]; // Cada equipo tiene 7 jugadores
     private int cantidadJugadores = 0;
 
+    // Constructor de Equipos
     public Equipos(String nombreEquipo) {
-        this.idEquipo = contadorEquipos++;
+        this.idEquipo = contadorEquipos++; // El ID se incrementa a partir de 100
         this.nombreEquipo = nombreEquipo;
     }
 
@@ -33,13 +33,14 @@ public class Equipos {
         return cantidadJugadores;
     }
 
+    // Agregar un jugador al equipo
     public void agregarJugador(Jugadores jugador) {
         if (cantidadJugadores < jugadores.length) {
             jugadores[cantidadJugadores++] = jugador;
         }
     }
 
-    // Método para eliminar jugadores de un equipo
+    // Eliminar un jugador del equipo
     public boolean eliminarJugador(int idJugador) {
         for (int i = 0; i < cantidadJugadores; i++) {
             if (jugadores[i].getID() == idJugador) {
@@ -56,8 +57,7 @@ public class Equipos {
 
     // Método estático para inicializar jugadores y asignarlos a los equipos
     public static void inicializarJugadoresYAsignarEquipos() {
-        // Inicializamos los jugadores
-        Jugadores.inicializarJugadores();
+        Jugadores.inicializarJugadores();  // Inicializa los jugadores
 
         // Crear los equipos
         Equipos equipo1 = new Equipos("Liga Deportiva");
@@ -65,49 +65,78 @@ public class Equipos {
         Equipos equipo3 = new Equipos("Heredia");
 
         // Asignamos jugadores a los equipos
-        equipo1.agregarJugador(Jugadores.getJugadorPorID(0));
-        equipo1.agregarJugador(Jugadores.getJugadorPorID(1));
-        equipo1.agregarJugador(Jugadores.getJugadorPorID(2));
-        equipo1.agregarJugador(Jugadores.getJugadorPorID(3));
-        equipo1.agregarJugador(Jugadores.getJugadorPorID(4));
+        for (int i = 0; i < 5; i++) {
+            equipo1.agregarJugador(Jugadores.getJugadorPorID(i + 10));  // Se asegura de que los jugadores empiezan en ID 10
+        }
 
-        equipo2.agregarJugador(Jugadores.getJugadorPorID(5));
-        equipo2.agregarJugador(Jugadores.getJugadorPorID(6));
-        equipo2.agregarJugador(Jugadores.getJugadorPorID(7));
-        equipo2.agregarJugador(Jugadores.getJugadorPorID(8));
-        equipo2.agregarJugador(Jugadores.getJugadorPorID(9));
+        for (int i = 5; i < 10; i++) {
+            equipo2.agregarJugador(Jugadores.getJugadorPorID(i + 10));  // Se asegura de que los jugadores empiezan en ID 10
+        }
 
-        equipo3.agregarJugador(Jugadores.getJugadorPorID(10));
-        equipo3.agregarJugador(Jugadores.getJugadorPorID(11));
-        equipo3.agregarJugador(Jugadores.getJugadorPorID(12));
-        equipo3.agregarJugador(Jugadores.getJugadorPorID(13));
-        equipo3.agregarJugador(Jugadores.getJugadorPorID(14));
+        for (int i = 10; i < 15; i++) {
+            equipo3.agregarJugador(Jugadores.getJugadorPorID(i + 10));  // Se asegura de que los jugadores empiezan en ID 10
+        }
 
         // Agregar los equipos al arreglo de equipos
         equipos[0] = equipo1;
         equipos[1] = equipo2;
         equipos[2] = equipo3;
 
-        // Mostrar los jugadores
-        Jugadores.mostrarJugadores();
+        // Mostrar los jugadores asignados a los equipos
+        mostrarJugadores();
     }
 
-   public void mostrarDetalles() {
-    String listaJugadores = "Equipo: " + nombreEquipo + "\nJugadores:\n";
-    for (int i = 0; i < cantidadJugadores; i++) {
-        Jugadores jugador = jugadores[i];
-        String equipoNombre;
-        
-        if (jugador.getEquipo() != null) {
-            equipoNombre = jugador.getEquipo().getNombreEquipo();
-        } else {
-            equipoNombre = "Libre";
+    // Método estático para mostrar los jugadores asignados a los equipos
+    public static void mostrarJugadores() {
+        String listaEquipos = "Jugadores asignados a equipos:\n";
+
+        for (Equipos equipo : equipos) {
+            if (equipo != null) {
+                listaEquipos += "Equipo: " + equipo.getNombreEquipo() + " (ID: " + equipo.getIdEquipo() + ")\n";
+                for (int i = 0; i < equipo.getCantidadJugadores(); i++) {
+                    Jugadores jugador = equipo.getJugadores()[i];
+                    if (jugador != null) {
+                        listaEquipos += "  - ID: " + jugador.getID()
+                                + " | Nombre: " + jugador.getNombre()
+                                + " | Posición: " + jugador.getPosicion()
+                                + " | Estado: " + jugador.getEstado() + "\n";
+                    }
+                }
+                listaEquipos += "\n"; // Separador entre equipos
+            }
         }
 
-        listaJugadores += "ID: " + jugador.getID() + " | Nombre: " + jugador.getNombre() +
-                " | Posición: " + jugador.getPosicion() + " | Estado: " + jugador.getEstado() +
-                " | Equipo: " + equipoNombre + "\n";
+        // Mostrar en consola
+        System.out.println(listaEquipos);
     }
-    JOptionPane.showMessageDialog(null, listaJugadores);
-   }
+
+    // Método estático para obtener la cantidad de equipos
+    public static int getCantidadEquipos() {
+        int cantidad = 0;
+        for (Equipos equipo : equipos) {
+            if (equipo != null) {
+                cantidad++;
+            }
+        }
+        return cantidad;
+    }
+
+    // Método estático para obtener un equipo por su índice
+    public static Equipos getEquipo(int index) {
+        if (index >= 0 && index < equipos.length) {
+            return equipos[index];
+        }
+        return null;
+    }
+
+    // Método estático para buscar un equipo por su ID
+    public static Equipos buscarEquipoPorId(int id) {
+        for (Equipos equipo : equipos) {
+            if (equipo != null && equipo.getIdEquipo() == id) {
+                return equipo;
+            }
+        }
+        return null;
+    }
 }
+
