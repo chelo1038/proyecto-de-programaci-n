@@ -2,12 +2,12 @@ package com.mycompany.proyectofinalfutbol5;
 
 import javax.swing.JOptionPane;
 
-
 public class GestionJugadores {
 
     private static Jugadores[] jugadores = new Jugadores[70];
     private static int cantidadJugadores = 0;
 
+    // Menú principal de gestión de jugadores
     public static void gestionJugadores() {
         boolean jugadorGestion = true;
         while (jugadorGestion) {
@@ -20,7 +20,7 @@ public class GestionJugadores {
                     + "       5- Volver al menu. 🔚\n"
                     + "╚═══════════════════════════════════════════════════╝"));
 
-            switch (codigo1) { 
+            switch (codigo1) {
                 case 1:
                     mostrarJugadores();
                     break;
@@ -43,19 +43,49 @@ public class GestionJugadores {
         }
     }
 
+    // Mostrar todos los jugadores
     private static void mostrarJugadores() {
-        Jugadores.mostrarJugadores();
+
+    String listaJugadores = "Lista de jugadores:\n";
+
+        // Recorrer el arreglo de jugadores usando un bucle for tradicional
+        for (int i = 0; i < cantidadJugadores; i++) { // Cambié la longitud para que recorra hasta el contador real de jugadores
+            if (jugadores[i] != null) {
+                String equipoNombre = "Libre"; // Valor por defecto si no tiene equipo
+                if (jugadores[i].getEquipo() != null) {
+                    equipoNombre = jugadores[i].getEquipo().getNombreEquipo();
+                }
+                listaJugadores += "ID: " + jugadores[i].getID()
+                        + " | Nombre: " + jugadores[i].getNombre()
+                        + " | Posición: " + jugadores[i].getPosicion()
+                        + " | Estado: " + jugadores[i].getEstado()
+                        + " | Equipo: " + equipoNombre + "\n";
+            }
+        }
+
+        // Mostrar la lista de jugadores
+        System.out.println(listaJugadores);
+      
     }
 
+
+        
+    // Agregar un nuevo jugador
     private static void agregarJugador() {
         String nombre = JOptionPane.showInputDialog("Ingrese el nombre del jugador: ");
         Posicion posicion = seleccionPosicion();
         Equipos equipo = seleccionEquipo();
         Estado estado = seleccionEstado();
 
+        // Crear nuevo jugador
         Jugadores jugador = new Jugadores(nombre, posicion, equipo, estado);
+
+        // Asignar al arreglo de jugadores
         jugadores[cantidadJugadores] = jugador;
         cantidadJugadores++;
+
+        // Agregar el jugador al equipo
+        equipo.agregarJugador(jugador);
 
         JOptionPane.showMessageDialog(null,
                 "Jugador agregado con éxito: "
@@ -64,8 +94,12 @@ public class GestionJugadores {
                 + "\nPosición: " + jugador.getPosicion()
                 + "\nEquipo: " + jugador.getEquipo().getNombreEquipo()
                 + "\nEstado: " + jugador.getEstado());
+
+        // Mostrar la lista de jugadores actualizada
+        mostrarJugadores();
     }
 
+    // Editar un jugador existente
     private static void editarJugador() {
         int idJugador = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del jugador a editar: "));
         boolean jugadorEncontrado = false;
@@ -95,6 +129,7 @@ public class GestionJugadores {
         }
     }
 
+    // Eliminar un jugador
     private static void eliminarJugador() {
         int idJugador = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el ID del jugador a eliminar: "));
         for (int i = 0; i < cantidadJugadores; i++) {
@@ -108,33 +143,45 @@ public class GestionJugadores {
         JOptionPane.showMessageDialog(null, "Jugador no encontrado.");
     }
 
+    // Selección de posición del jugador
     private static Posicion seleccionPosicion() {
         String[] opciones = {"Portero", "Defensa", "Mediocampista", "Delantero"};
         int seleccion = JOptionPane.showOptionDialog(null, "Seleccione la posición del jugador:", "Posición",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 
         switch (seleccion) {
-            case 0: return Posicion.Portero;
-            case 1: return Posicion.Defensa;
-            case 2: return Posicion.MedioCampista;
-            case 3: return Posicion.Delantero;
-            default: return null;
+            case 0:
+                return Posicion.Portero;
+            case 1:
+                return Posicion.Defensa;
+            case 2:
+                return Posicion.MedioCampista;
+            case 3:
+                return Posicion.Delantero;
+            default:
+                return null;
         }
     }
 
+    // Selección de estado del jugador
     private static Estado seleccionEstado() {
         String[] opciones = {"Titular", "Suplente", "Libre"};
         int seleccion = JOptionPane.showOptionDialog(null, "Seleccione el estado del jugador:", "Estado",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 
         switch (seleccion) {
-            case 0: return Estado.Titular;
-            case 1: return Estado.Suplente;
-            case 2: return Estado.Libre;
-            default: return null;
+            case 0:
+                return Estado.Titular;
+            case 1:
+                return Estado.Suplente;
+            case 2:
+                return Estado.Libre;
+            default:
+                return null;
         }
     }
 
+    // Selección de equipo del jugador
     private static Equipos seleccionEquipo() {
         String[] opciones = {"Liga Deportiva", "Saprissa", "Heredia"};
         int seleccion = JOptionPane.showOptionDialog(null, "Seleccione el equipo del jugador:", "Equipo",
@@ -142,9 +189,15 @@ public class GestionJugadores {
 
         Equipos equipo = null;
         switch (seleccion) {
-            case 0: equipo = new Equipos("Liga Deportiva"); break;
-            case 1: equipo = new Equipos("Saprissa"); break;
-            case 2: equipo = new Equipos("Heredia"); break;
+            case 0:
+                equipo = new Equipos("Liga Deportiva");
+                break;
+            case 1:
+                equipo = new Equipos("Saprissa");
+                break;
+            case 2:
+                equipo = new Equipos("Heredia");
+                break;
         }
         return equipo;
     }
