@@ -2,7 +2,6 @@ package com.mycompany.proyectofinalfutbol5;
 
 import javax.swing.JOptionPane;
 
-
 public class GestionEquipo {
 
     private static Equipos[] equipos = new Equipos[10];
@@ -11,7 +10,6 @@ public class GestionEquipo {
     public static void gestionEquipos() {
         boolean equipoGestion = true;
         while (equipoGestion) {
-
             int manuEquipo = Integer.parseInt(JOptionPane.showInputDialog(
                     "╔══════════════ Gestión de Equipos ═════════════════╗\n"
                     + "      1- Mostrar Equipos. \n"
@@ -44,21 +42,20 @@ public class GestionEquipo {
     }
 
     public static void mostrarEquipos() {
-        String listaEquipos = "Equipos registrados:\n";
-        for (int i = 0; i < cantidadEquipos; i++) {
-            Equipos equipo = equipos[i];
-            listaEquipos += "ID Equipo: " + equipo.getIdEquipo() + " Nombre: " + equipo.getNombreEquipo() + "\n";
-            listaEquipos += "Jugadores:\n";
-            for (int j = 0; j < equipo.getCantidadJugadores(); j++) {
-                Jugadores jugador = equipo.getJugadores()[j];
-                listaEquipos += "ID: " + jugador.getID() + " Nombre: " + jugador.getNombre() +
-                        " | Posición: " + jugador.getPosicion() + " | Estado: " + jugador.getEstado() + "\n";
-            }
-            listaEquipos += "\n";
-        }
-        JOptionPane.showMessageDialog(null, listaEquipos);
+
+    // Verificar si el arreglo equipos está inicializado
+    if (equipos == null) {
+        System.out.println("No hay equipos inicializados.");
+        return;
     }
 
+    // Recorrer el arreglo equipos usando un bucle for tradicional
+    System.out.println("Lista de equipos:");
+    for (int i = 0; i < equipos.length; i++) {
+        if (equipos[i] != null) {
+            System.out.println("ID: " + equipos[i].getIdEquipo() + " | Nombre: " + equipos[i].getNombreEquipo());
+        }
+    }}
     public static void agregarEquipo() {
         if (cantidadEquipos < equipos.length) {
             String nombreEquipo = JOptionPane.showInputDialog("Ingrese el nombre del equipo: ");
