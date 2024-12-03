@@ -40,7 +40,7 @@ public class ProyectoFinalFutbol5 {
                     break;
                 case 2:
                     // Simulación de partidos (pendiente de implementación)
-                    JOptionPane.showMessageDialog(null, "Simulación de partidos en desarrollo.");
+                  SimulacionPartidos.simularPartido();
                     break;
                 case 3:
                     JOptionPane.showMessageDialog(null, "Generando reportes...");
