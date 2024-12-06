@@ -56,9 +56,5 @@ public class ProyectoFinalFutbol5 {
     }
 }
 
-//Para este segundo avance (5% del total del proyecto), se solicita presentar: 
-// Haber implementado los constructores y el encapsulamiento en las clases del proyecto.
-// El sistema debería contener arreglos de objetos para manipular los objetos dentro del sistema.
-// La gestión completa de jugadores y equipos en el sistema, con la funcionalidad de agregar, editar y 
-//eliminar.
+
 
